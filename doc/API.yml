@@ -16,7 +16,7 @@ tags:
 - name: "Evento"
 
 paths:
-  /eventos/v1/tipo:
+  /evento/v1/tipo:
    post:
     tags:
       - "Tipo"
@@ -25,7 +25,7 @@ paths:
     parameters:
       - name: nomeTipo
         in: query
-        description: Nome do novo evento
+        description: Nome do tipo de evento
         required: true
         schema:
           type: string
@@ -39,7 +39,7 @@ paths:
       '500': 
         description: Internal Server Error
 
-  /eventos/v1/categoria:
+  /evento/v1/categoria:
    post:
     tags:
       - "Categoria"
@@ -60,7 +60,7 @@ paths:
       '500': 
         description: Internal Server Error
 
-  /eventos/v1/atividade:
+  /evento/v1/atividade:
    post:
     tags:
       - "Atividade"
@@ -90,21 +90,26 @@ components:
       properties:
         nomeCategoria:
           type: string
+          description: Nome da categoria do evento
           example: Congresso
         descricaoCategoria:
           type: string
+          description: Breve descrição da categoria
           example: Evento para apresentação de portifolio
         statusCategoria:
           type: boolean
+          description: Status da categoria, se esta ativa ou não
           example: true
     Atividade:
       type: object
       properties:
         nomeAtividade:
           type: string
+          description: Nome da atividade em um evento
           example: Workshop
         statusAtividade:
           type: boolean
+          description: Status da atividade, se esta ativa ou não
           example: true
 
 
