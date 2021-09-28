@@ -1,0 +1,83 @@
+openapi: '3.0.2'
+
+info:
+  title: Plataforma Caracas - Eventos
+  description: App para cadastro de eventos e suas dependencias
+  version: '0.0.1'
+
+servers:
+- url: https://definir_url_base
+  description: Servidor de Desenvolvimento da API
+
+tags:
+- name: "Tipo"
+- name: "Categoria"
+- name: "Atividade"
+- name: "Evento"
+
+paths:
+  /eventos/v1/tipo:
+   post:
+    tags:
+      - "Tipo"
+    description: Cadastra um novo tipo de evento
+    operationId: postTipoEvento
+    parameters:
+      - name: nomeEvento
+        in: query
+        description: Nome do novo evento
+        required: true
+        schema:
+          type: string
+    responses:
+      '201': 
+        description: Novo tipo de evento criado com sucesso
+      '401': 
+        description: Unauthorized
+      '403': 
+        description: Not Found
+      '500': 
+        description: Internal Server Error
+
+  /eventos/v1/categoria:
+   post:
+    tags:
+      - "Categoria"
+    description: Cadastra uma nova categoria de evento
+    operationId: postCategoriaEvento
+    requestBody:
+      content:
+        'application/json':
+          schema:
+            $ref: '#/components/schemas/Categoria'
+    responses:
+      '201': 
+        description: Novo tipo de evento criado com sucesso
+      '401': 
+        description: Unauthorized
+      '403': 
+        description: Not Found
+      '500': 
+        description: Internal Server Error
+
+
+components:
+  schemas:
+
+     Categoria:
+      type: object
+      properties:
+        categoriaNome:
+          type: string
+          example: Congresso
+        categoriaDescricao:
+          type: string
+          example: Evento para apresentação de portifolio
+        categoriaStatus:
+          type: boolean
+          example: true
+
+
+
+
+
