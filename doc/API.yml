@@ -22,13 +22,11 @@ paths:
       - "Tipo"
     description: Cadastra um novo tipo de evento
     operationId: postTipoEvento
-    parameters:
-      - name: nomeTipo
-        in: query
-        description: Nome do tipo de evento
-        required: true
-        schema:
-          type: string
+    requestBody:
+      content:
+        'application/json':
+          schema:
+            $ref: '#/components/schemas/Tipo'
     responses:
       '201': 
         description: Novo `tipo` de evento criado com sucesso
@@ -107,6 +105,26 @@ paths:
 components:
   schemas:
 
+    Tipo:
+      type: object
+      required:
+          - nomeTipo
+          - descricaoTipo
+          - statusTipo
+      properties:
+        nomeTipo:
+          type: string
+          description: Nome do Tipo do evento
+          example: Acadêmico
+        descricaoTipo:
+          type: string
+          description: Breve descrição do Tipo
+          example: Evento de nicho acadêmico
+        statusTipo:
+          type: boolean
+          description: Status do Tipo, se esta ativo ou não
+          example: true
+
     Categoria:
       type: object
       required:
@@ -126,6 +144,7 @@ components:
           type: boolean
           description: Status da categoria, se esta ativa ou não
           example: true
+
     Atividade:
       type: object
       required:
