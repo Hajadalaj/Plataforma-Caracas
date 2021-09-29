@@ -2,7 +2,7 @@ openapi: '3.0.2'
 
 info:
   title: Plataforma Caracas - Eventos
-  description: App para cadastro de eventos e suas dependencias
+  description: App para gestão de eventos e suas dependencias,tais quais atividade, categoria e tipo
   version: '0.0.1'
 
 servers:
@@ -81,12 +81,38 @@ paths:
       '500': 
         description: Internal Server Error
 
+  /evento/v1/evento:
+   post:
+    tags:
+      - "Evento"
+    description: Cadastra um novo Evento
+    operationId: postEvento
+    requestBody:
+      content:
+        'application/json':
+          schema:
+            $ref: '#/components/schemas/Evento'
+    responses:
+      '201': 
+        description: Novo `evento` criado com sucesso
+      '401': 
+        description: Unauthorized
+      '403': 
+        description: Forbiden
+      '500': 
+        description: Internal Server Error
+
+
 
 components:
   schemas:
 
     Categoria:
       type: object
+      required:
+          - nomeCategoria
+          - descricaoCategoria
+          - statusCategoria
       properties:
         nomeCategoria:
           type: string
@@ -102,6 +128,9 @@ components:
           example: true
     Atividade:
       type: object
+      required:
+          - nomeAtividade
+          - statusAtividade
       properties:
         nomeAtividade:
           type: string
@@ -111,6 +140,57 @@ components:
           type: boolean
           description: Status da atividade, se esta ativa ou não
           example: true
+
+    Evento:
+      type: object
+      properties:
+        nomeEvento:
+          type: string
+          description: Nome do Evento
+          example: SIMGETEC
+        descricaoEvento:
+          type: string
+          description: Breve descrição do Evento
+          example: Simposio de Gestão e Tecnologia da FATEC Carapicuiba
+        dataInicio:
+          type: string
+          format: date
+          description: Data que inicia o evento
+          example: '2021-12-07'
+        dataFim:
+          type: string
+          format: date          
+          description: Data que encerra o evento
+          example: '2021-12-10'
+        tipoEvento:
+          type: string
+          description: Tipo do evento
+          example: Acadêmico
+        categoriaEvento:
+          type: string
+          description: Categoria do evento
+          example: Simpósio
+        atividadesEvento:
+          type: array
+          description: Atividades do evento
+          items:
+            $ref: '#/components/schemas/AtividadeEvento'
+        statusEvento:
+          type: boolean
+          description: Status do evento, se esta ativo ou não
+          example: true
+          
+    AtividadeEvento:
+      allOf:
+        - $ref: '#/components/schemas/Atividade'
+      type: object
+      required:
+          - quantidadeVagas
+      properties:
+        quantidadeVagas:
+          type: integer
+          description: Limites de vagas por atividade
+          example: 30
 
 
 
