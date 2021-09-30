@@ -9,6 +9,10 @@ servers:
 - url: https://definir_url_base
   description: Servidor de Desenvolvimento da API
 
+security:
+  - bearerAuth: []
+
+
 tags:
 - name: "Tipo"
 - name: "Categoria"
@@ -17,94 +21,185 @@ tags:
 
 paths:
   /evento/v1/tipo:
-   post:
-    tags:
-      - "Tipo"
-    description: Cadastra um novo tipo de evento
-    operationId: postTipoEvento
-    requestBody:
-      content:
-        'application/json':
-          schema:
-            $ref: '#/components/schemas/Tipo'
-    responses:
-      '201': 
-        description: Novo `tipo` de evento criado com sucesso
-      '401': 
-        description: Unauthorized
-      '403': 
-        description: Forbiden
-      '500': 
-        description: Internal Server Error
+    post:
+      tags:
+        - "Tipo"
+      description: Cadastra um novo tipo de evento
+      operationId: postTipoEvento
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Tipo'
+      security:
+        - bearerAuth: []
+      responses:
+        '201': 
+          description: Novo `tipo` de evento criado com sucesso
+        '401': 
+          description: Unauthorized
+        '403': 
+          description: Forbiden
+        '500': 
+          description: Internal Server Error
+    get:
+      tags:
+        - "Tipo"
+      description: Retorna todos os tipos cadastrados
+      operationId: getTipoEvento
+      security:
+        - bearerAuth: []
+      responses:
+        '200': 
+          description: Operação bem sucedida
+          $ref: '#/components/responses/Response200Tipos'
+        '401': 
+          description: Unauthorized
+        '403': 
+          description: Forbiden
+        '404': 
+          description: Not Found
+        '500': 
+          description: Internal Server Error
+  
 
   /evento/v1/categoria:
-   post:
-    tags:
-      - "Categoria"
-    description: Cadastra uma nova categoria de evento
-    operationId: postCategoriaEvento
-    requestBody:
-      content:
-        'application/json':
-          schema:
-            $ref: '#/components/schemas/Categoria'
-    responses:
-      '201': 
-        description: Nova `categoria` de evento criada com sucesso
-      '401': 
-        description: Unauthorized
-      '403': 
-        description: Forbiden
-      '500': 
-        description: Internal Server Error
+    post:
+      tags:
+        - "Categoria"
+      description: Cadastra uma nova categoria de evento
+      operationId: postCategoriaEvento
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Categoria'
+      security:
+        - bearerAuth: []
+      responses:
+        '201': 
+          description: Nova `categoria` de evento criada com sucesso
+        '401': 
+          description: Unauthorized
+        '403': 
+          description: Forbiden
+        '500': 
+          description: Internal Server Error
+    get:
+      tags:
+        - "Categoria"
+      description: Retorna todas as categorias cadastradas
+      operationId: getCategoriaEvento
+      security:
+        - bearerAuth: []
+      responses:
+        '200': 
+          description: Operação bem sucedida
+          $ref: '#/components/responses/Response200Categorias'
+        '401': 
+          description: Unauthorized
+        '403': 
+          description: Forbiden
+        '404': 
+          description: Not Found
+        '500': 
+          description: Internal Server Error
 
   /evento/v1/atividade:
-   post:
-    tags:
-      - "Atividade"
-    description: Cadastra uma nova atividade de evento
-    operationId: postAtividadeEvento
-    requestBody:
-      content:
-        'application/json':
-          schema:
-            $ref: '#/components/schemas/Atividade'
-    responses:
-      '201': 
-        description: Nova `atividade` criada com sucesso
-      '401': 
-        description: Unauthorized
-      '403': 
-        description: Forbiden
-      '500': 
-        description: Internal Server Error
+    post:
+      tags:
+        - "Atividade"
+      description: Cadastra uma nova atividade de evento
+      operationId: postAtividadeEvento
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Atividade'
+      security:
+        - bearerAuth: []
+      responses:
+        '201': 
+          description: Nova `atividade` criada com sucesso
+        '401': 
+          description: Unauthorized
+        '403': 
+          description: Forbiden
+        '500': 
+          description: Internal Server Error
+    get:
+      tags:
+        - "Atividade"
+      description: Retorna todas as atividades cadastradas
+      operationId: getAtividadeEvento
+      security:
+        - bearerAuth: []
+      responses:
+        '200': 
+          description: Operação bem sucedida
+          $ref: '#/components/responses/Response200Atividades'
+        '401': 
+          description: Unauthorized
+        '403': 
+          description: Forbiden
+        '404': 
+          description: Not Found
+        '500': 
+          description: Internal Server Error
 
   /evento/v1/evento:
-   post:
-    tags:
-      - "Evento"
-    description: Cadastra um novo Evento
-    operationId: postEvento
-    requestBody:
-      content:
-        'application/json':
-          schema:
-            $ref: '#/components/schemas/Evento'
-    responses:
-      '201': 
-        description: Novo `evento` criado com sucesso
-      '401': 
-        description: Unauthorized
-      '403': 
-        description: Forbiden
-      '500': 
-        description: Internal Server Error
+    post:
+      tags:
+        - "Evento"
+      description: Cadastra um novo Evento
+      operationId: postEvento
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Evento'
+      security:
+        - bearerAuth: []            
+      responses:
+        '201': 
+          description: Novo `evento` criado com sucesso
+        '401': 
+          description: Unauthorized
+        '403': 
+          description: Forbiden
+        '500': 
+          description: Internal Server Error
+    get:
+      tags:
+        - "Evento"
+      description: Retorna todos os eventos cadastrados
+      operationId: getEvento
+      security:
+        - bearerAuth: []            
+      responses:
+        '200': 
+          description: Operação bem sucedida
+          $ref: '#/components/responses/Response200Eventos'
+        '401': 
+          description: Unauthorized
+        '403': 
+          description: Forbiden
+        '404': 
+          description: Not Found
+        '500': 
+          description: Internal Server Error
 
 
 
 components:
-  schemas:
 
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: UUID
+
+  schemas:
     Tipo:
       type: object
       required:
@@ -124,6 +219,17 @@ components:
           type: boolean
           description: Status do Tipo, se esta ativo ou não
           example: true
+    TiposResponse:
+      allOf:
+        - $ref: '#/components/schemas/Tipo'
+      type: object
+      properties:
+        idTipo:
+          type: integer
+          description: Identificador do tipo
+          minimum: 1
+          maximum: 99999999999
+          example: 14
 
     Categoria:
       type: object
@@ -144,6 +250,17 @@ components:
           type: boolean
           description: Status da categoria, se esta ativa ou não
           example: true
+    CategoriasResponse:
+      allOf:
+        - $ref: '#/components/schemas/Categoria'
+      type: object
+      properties:
+        idCategoria:
+          type: integer
+          description: Identificador da Categoria
+          minimum: 1
+          maximum: 99999999999
+          example: 35
 
     Atividade:
       type: object
@@ -159,9 +276,29 @@ components:
           type: boolean
           description: Status da atividade, se esta ativa ou não
           example: true
+    AtividadesResponse:
+      allOf:
+        - $ref: '#/components/schemas/Atividade'
+      type: object
+      properties:
+        idAtividade:
+          type: integer
+          description: Identificador da atividade
+          minimum: 1
+          maximum: 99999999999
+          example: 55
 
     Evento:
       type: object
+      required:
+      - nomeEvento
+      - descricaoEvento
+      - dataInicio
+      - dataFim
+      - tipoEvento
+      - categoriaEvento
+      - atividadesEvento
+      - statusEvento
       properties:
         nomeEvento:
           type: string
@@ -198,6 +335,17 @@ components:
           type: boolean
           description: Status do evento, se esta ativo ou não
           example: true
+    EventosResponse:
+      allOf:
+        - $ref: '#/components/schemas/Evento'
+      type: object
+      properties:
+        idEvento:
+          type: integer
+          description: Identificador do evento
+          minimum: 1
+          maximum: 99999999999
+          example: 320
           
     AtividadeEvento:
       allOf:
@@ -211,6 +359,112 @@ components:
           description: Limites de vagas por atividade
           example: 30
 
+
+  responses:
+
+    Response200Tipos:
+      description: A requisição retornou com sucesso
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TiposResponse'
+          examples:
+            exemploTipo:
+              $ref: '#/components/examples/exemploTipo'
+    Response200Categorias:
+      description: A requisição retornou com sucesso
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/CategoriasResponse'
+          examples:
+            exemploCategoria:
+              $ref: '#/components/examples/exemploCategoria'
+    Response200Atividades:
+      description: A requisição retornou com sucesso
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AtividadesResponse'
+          examples:
+            exemploCategoria:
+              $ref: '#/components/examples/exemploAtividade'
+    Response200Eventos:
+      description: A requisição retornou com sucesso
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/EventosResponse'
+          examples:
+            exemploCategoria:
+              $ref: '#/components/examples/exemploEvento'
+
+
+  examples:
+    exemploTipo:
+      value: 
+        - idTipo: 1
+          nomeTipo: Acadêmico
+          descricaoTipo: Evento de nicho acadêmico
+          statusTipo: true
+        - idTipo: 2
+          nomeTipo: Científico
+          descricaoTipo: Evento de nicho científico
+          statusTipo: true
+      summary: Exemplo de tipo
+    exemploCategoria:
+      value: 
+        - idCategoria: 1
+          nomeCategoria: Congresso
+          descricaoCategoria: Evento para apresentação de portifolio
+          statusCategoria: true
+        - idCategoria: 2
+          nomeCategoria: Simpósio
+          descricaoCategoria: Evento para iniciativa da comunidade científica.
+          statusCategoria: true
+      summary: Exemplo de categoria
+    exemploAtividade:
+      value: 
+        - idAtividade: 12
+          nomeAtividade: Conferência
+          descricaoAtividade: Reunião ampla e democratica de discussão e articulação coletivas
+          statusAtividade: true
+        - idAtividade: 25
+          nomeAtividade: Seminário
+          descricaoAtividade: Tem a função de reunir pequenos grupos para reuniões recorrentes
+          statusAtividade: true
+      summary: Exemplo de atividade
+    exemploEvento:
+      value: 
+        - idEvento: 1
+          nomeEvento: SIMGETEC
+          descricaoEvento: Simpósio de Gestão e Tecnologia da FATEC Carapicuiba
+          dataInicio: '2021-12-07'
+          dataFim: '2021-12-10'
+          tipoEvento: Acadêmico
+          categoriaEvento: Simpósio
+          atividadesEvento: [{ "nomeAtividade": "Conferência", "statusAtividade": true, "quantidadeVagas": 10 },
+          { "nomeAtividade": "Seminário", "statusAtividade": true, "quantidadeVagas": 15 }]
+          statusEvento: true
+        - idEvento: 2
+          nomeEvento: Caracas Game Jam 
+          descricaoEvento: Evento que reune a comunidade da Fatec Carapicuiba em uma semana de jogos e atividades
+          dataInicio: '2021-10-09'
+          dataFim: '2021-10-16'
+          tipoEvento: Acadêmico
+          categoriaEvento: Feira
+          atividadesEvento: [{ "nomeAtividade": "Campeonato de FIFA", "statusAtividade": true, "quantidadeVagas": 20 },
+          { "nomeAtividade": "Campeonato de Super Smash Bros.", "statusAtividade": true, "quantidadeVagas": 50 }]
+          statusEvento: true
+      summary: Exemplo de evento
 
 
 
